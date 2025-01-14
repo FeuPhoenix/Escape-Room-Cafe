@@ -88,16 +88,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scrabble Interaction
     const scrabbleGame = document.getElementById('scrabble-game');
     const backToRoomScrabbleButton = document.getElementById('back-to-room-scrabble');
+    const backToMenuScrabbleButton = document.getElementById('back-to-menu-scrabble');
     
     scrabbleGame.addEventListener('click', () => {
+        // Clear any existing state
+        const existingMessages = document.querySelectorAll('.error-message, .instruction-message');
+        existingMessages.forEach(msg => msg.remove());
+        
+        // Hide game area and show scrabble puzzle
         gameArea.classList.add('hidden');
         document.getElementById('scrabble-puzzle').classList.remove('hidden');
+        
+        // Initialize the game
         initializeScrabble();
+        
+        // Force a reflow to ensure proper display
+        document.getElementById('scrabble-puzzle').offsetHeight;
     });
     
     backToRoomScrabbleButton.addEventListener('click', () => {
         document.getElementById('scrabble-puzzle').classList.add('hidden');
         gameArea.classList.remove('hidden');
+    });
+
+    backToMenuScrabbleButton.addEventListener('click', () => {
+        document.getElementById('scrabble-puzzle').classList.add('hidden');
+        gameArea.classList.add('hidden');
+        startMenu.classList.remove('hidden');
     });
 
     // Add this function to create the preview board

@@ -362,4 +362,34 @@ function initializeChessPuzzle() {
     document.getElementById('back-to-room-chess').addEventListener('click', () => {
         resetPuzzle();
     });
+}
+
+function showSolvedState() {
+    const screen = document.querySelector('.screen');
+    screen.classList.add('solved');
+    
+    const hintButton = document.querySelector('.hint-button');
+    if (hintButton) {
+        hintButton.remove();
+    }
+
+    const message = document.createElement('div');
+    message.className = 'win-message';
+    message.textContent = "You've already solved this puzzle!";
+    document.getElementById('chess-board').insertAdjacentElement('beforebegin', message);
+}
+
+function checkWin() {
+    // ... existing win check code ...
+    if (isWin) {
+        const screen = document.querySelector('.screen');
+        screen.classList.add('solved');
+        
+        const hintButton = document.querySelector('.hint-button');
+        if (hintButton) {
+            hintButton.remove();
+        }
+        
+        // ... rest of existing win code ...
+    }
 } 
