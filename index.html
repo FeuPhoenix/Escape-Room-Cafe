@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Game Café Escape Room</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+    <!-- Confetti for animations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Achievement popup container -->
+        <div id="achievements-container" class="achievements-container">
+            <!-- Achievements will be added here dynamically -->
+        </div>
+
+        <!-- Start Menu -->
+        <div id="start-menu" class="screen">
+            <h1>Escape the Board Game Café</h1>
+            <p>You're locked inside the board game café after hours. Can you solve the puzzles to escape?</p>
+            <div class="game-icons">
+                <span class="icon">♟️</span>
+                <span class="icon">🎲</span>
+                <span class="icon">🎮</span>
+            </div>
+            <button id="start-button" class="game-button">Start Game</button>
+            <button id="reset-progress" class="game-button reset-button">Reset Progress</button>
+        </div>
+
+        <!-- Main Game Area (Room View) -->
+        <div id="game-area" class="screen hidden">
+            <div id="room-view">
+                <div class="interactive-item" id="connect4-game" data-item="connect4">
+                    <!-- Preview cells will be added by JavaScript -->
+                </div>
+                <div class="interactive-item" id="chess-game" data-item="chess">
+                    <!-- Chess preview will be added by JavaScript -->
+                </div>
+                <div class="interactive-item" id="scrabble-game" data-item="scrabble">
+                    <!-- Scrabble board preview will be added by JavaScript -->
+                </div>
+                <!-- Add scattered letters around the room -->
+                <div class="interactive-item letter-tile" id="letter-E" data-letter="E">E</div>
+                <div class="interactive-item letter-tile" id="letter-S" data-letter="S">S</div>
+                <div class="interactive-item letter-tile" id="letter-C" data-letter="C">C</div>
+            </div>
+            <button id="back-to-menu-room" class="menu-button">Return to Menu</button>
+        </div>
+
+        <!-- Chess Puzzle View -->
+        <div id="chess-puzzle" class="screen hidden">
+            <h2>Chess Puzzle</h2>
+            <div id="chess-board"></div>
+            <div id="chess-pieces-selection"></div>
+            <p class="instruction-message">You found some chess pieces. Can you find the checkmate?</p>
+            <button id="chess-hint-button">Get Hint</button>
+            <button id="back-to-room-chess">Return to Room</button>
+            <div id="secret-compartment" class="hidden">
+                <div class="compartment-content">
+                    <h3>A compartment opened!</h3>
+                    <p>You found a red Connect4 piece!</p>
+                    <div class="connect4-piece red"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connect 4 Puzzle View -->
+        <div id="connect4-puzzle" class="screen hidden">
+            <h2>Connect 4 Puzzle</h2>
+            <div id="connect4-board"></div>
+            <button id="back-to-room">Return to Room</button>
+        </div>
+
+        <!-- Scrabble Puzzle View -->
+        <div id="scrabble-puzzle" class="screen hidden">
+            <h2>Scrabble Puzzle</h2>
+            <div id="scrabble-board"></div>
+            <div id="player-tiles"></div>
+            <div id="collected-letters"></div>
+            <p class="instruction-message">Form words using your collected letters to unlock the next puzzle!</p>
+            <div class="button-container">
+                <button id="back-to-room-scrabble">Return to Room</button>
+            </div>
+        </div>
+
+        <!-- Word Dictionary -->
+        <div id="word-dictionary" class="hidden">
+            <h3>Word Found!</h3>
+            <p class="word-definition"></p>
+        </div>
+    </div>
+
+    <!-- Load game scripts -->
+    <script src="scripts/connect4.js"></script>
+    <script src="scripts/chess.js"></script>
+    <script src="scripts/scrabble.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html> 
